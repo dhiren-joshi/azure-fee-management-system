@@ -4,7 +4,7 @@ A cloud-native student fee management system built on Microsoft Azure. It stores
 fee records, exposes a secured API for querying and updating them, and sends
 automated reminders for overdue payments.
 
-Submitted for the Fusion Practices technical assessment.
+![Architecture](architecture-diagram.png)
 
 ---
 
