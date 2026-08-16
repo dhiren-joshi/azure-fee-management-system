@@ -1,0 +1,22 @@
+<!--
+    Applied at the "All operations" scope of the Fee Management API.
+
+    rate-limit counts calls per subscription, so each API key gets its own
+    budget rather than sharing one global counter. On the Consumption tier
+    rate-limit-by-key is not supported; rate-limit is the correct choice.
+-->
+<policies>
+    <inbound>
+        <base />
+        <rate-limit calls="5" renewal-period="60" />
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>

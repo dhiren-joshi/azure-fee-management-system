@@ -1,0 +1,53 @@
+﻿# ─── SECRETS — never commit ───
+local.settings.json
+functions/local.settings.json
+notes.txt
+notes.md
+scratch.txt
+secrets.txt
+keys.txt
+*.secret
+*.key
+*.pem
+*.pfx
+.env
+.env.*
+!.env.example
+
+# ─── Python ───
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.coverage
+
+# ─── Azure Functions ───
+bin/
+obj/
+appsettings.json
+.python_packages/
+.func/
+
+# ─── Azure tooling ───
+.azure/
+*.publishsettings
+*.PublishSettings
+
+# ─── Editors ───
+.vscode/
+.idea/
+*.swp
+
+# ─── OS ───
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Logs ───
+*.log
+logs/
+tmp/

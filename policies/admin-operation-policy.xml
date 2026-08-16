@@ -1,0 +1,44 @@
+<!--
+    Applied to the update_student_fees (PUT) operation ONLY.
+
+    The two GET operations remain accessible with just a subscription key.
+    This operation additionally requires an Entra ID bearer token carrying
+    the FeeAdmin app role.
+
+    Substitute:
+      {tenant-id}  - Directory (tenant) ID from the app registration
+      {client-id}  - Application (client) ID from the app registration
+
+    Note the openid-config URL has no /v2.0 segment. The client credentials
+    flow with a .default scope issues v1.0 tokens, whose issuer claim matches
+    the v1 metadata document. Pointing at the v2.0 endpoint fails validation
+    on an issuer mismatch.
+-->
+<policies>
+    <inbound>
+        <base />
+        <validate-jwt header-name="Authorization"
+                      failed-validation-httpcode="401"
+                      failed-validation-error-message="Unauthorized. Admin access required.">
+            <openid-config url="https://login.microsoftonline.com/{tenant-id}/.well-known/openid-configuration" />
+            <audiences>
+                <audience>api://{client-id}</audience>
+            </audiences>
+            <required-claims>
+                <claim name="roles" match="any">
+                    <value>FeeAdmin</value>
+                </claim>
+            </required-claims>
+        </validate-jwt>
+        <set-backend-service id="apim-generated-policy" backend-id="fee-management-api-dhiren" />
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>

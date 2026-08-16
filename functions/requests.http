@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:7071/api
+
+### Student 1 - expect "Paid"
+GET {{baseUrl}}/students/1
+
+### Student 9 - expect "Overdue"
+GET {{baseUrl}}/students/9
+
+### Student 18 - expect "Partially Paid"
+GET {{baseUrl}}/students/18
+
+### Student that does not exist - expect 404
+GET {{baseUrl}}/students/999
+
+### Overdue list - the Logic App calls this one
+GET {{baseUrl}}/overdue-students
+
+### Admin update - pay student 18 in full, status should flip to "Paid"
+PUT {{baseUrl}}/students/18/fees
+Content-Type: application/json
+
+{
+  "paidAmount": 120000
+}
+
+### Admin update - change the due date only
+PUT {{baseUrl}}/students/16/fees
+Content-Type: application/json
+
+{
+  "dueDate": "2026-12-31"
+}
+
+### Admin update with an empty body - expect 400
+PUT {{baseUrl}}/students/18/fees
+Content-Type: application/json
+
+{
+}
